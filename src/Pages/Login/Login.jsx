@@ -1,7 +1,34 @@
 import { Link } from "react-router-dom";
 import img from "../../assets/images/login/login.svg";
+import { useContext } from "react";
+import { AuthContext } from "../../Provider/AuthProvider";
+import toast from "react-hot-toast";
 
 const Login = () => {
+	// Use context data
+	const { signIn } = useContext(AuthContext);
+
+	const handleLogIn = event => {
+		event.preventDefault();
+		// Get form field value
+		const form = event.target;
+		const name = form.name.value;
+		const email = form.email.value;
+		const password = form.password.value;
+
+		const user = { name, email, password };
+		console.log(user);
+
+		signIn(email, password)
+			.then(result => {
+				console.log(result.user);
+				toast.success("Login successfull😍");
+			})
+			.catch(error => {
+				console.log(error);
+				toast.error("Something went wrong😥");
+			});
+	};
 	return (
 		<div className="container px-6 m-auto py-10">
 			<div className="grid grid-cols-4 gap-6 md:grid-cols-8 lg:grid-cols-12">
@@ -13,7 +40,7 @@ const Login = () => {
 						Log In
 					</p>
 
-					<form className=" w-full">
+					<form onSubmit={handleLogIn} className=" w-full">
 						<div className="mb-6">
 							<label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
 								Your email

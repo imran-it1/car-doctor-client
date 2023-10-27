@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import Footer from "../../Pages/Home/Shared/Footer/Footer";
 import Navbar from "../../Pages/Home/Shared/Navbar/Navbar";
+import { Toaster } from "react-hot-toast";
 
 const Main = () => {
 	return (
@@ -8,6 +9,7 @@ const Main = () => {
 			<Navbar />
 			<Outlet></Outlet>
 			<Footer />
+			<Toaster />
 		</div>
 	);
 };

@@ -1,7 +1,34 @@
 import { Link } from "react-router-dom";
 import img from "../../assets/images/login/login.svg";
+import { useContext } from "react";
+import { AuthContext } from "../../Provider/AuthProvider";
+import toast from "react-hot-toast";
 
 const Register = () => {
+	// use contect data
+
+	const { createUser } = useContext(AuthContext);
+
+	const handleSignUp = event => {
+		event.preventDefault();
+		// Get form field value
+		const form = event.target;
+		// eslint-disable-next-line no-unused-vars
+		const name = form.name.value;
+		const email = form.email.value;
+		const password = form.password.value;
+
+		createUser(email, password)
+			.then(result => {
+				console.log(result.user);
+				toast.success("Registration successfull!☺️");
+			})
+			.catch(error => {
+				console.log(error);
+				toast.error("Something went wrong!🙁");
+			});
+	};
+
 	return (
 		<div className="container px-6 m-auto py-10">
 			<div className="grid grid-cols-4 gap-6 md:grid-cols-8 lg:grid-cols-12">
@@ -13,7 +40,7 @@ const Register = () => {
 						Sign Up
 					</p>
 
-					<form className=" w-full">
+					<form onSubmit={handleSignUp} className=" w-full">
 						<div className="mb-6">
 							<label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">
 								Name
@@ -22,7 +49,7 @@ const Register = () => {
 								type="text"
 								name="name"
 								className="bg-gray-50 border border-rose-300 text-gray-900 text-sm rounded-lg focus:ring-rose-500 focus:border-rose-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-rose-500 dark:focus:border-rose-500"
-								placeholder="example@gmail.com"
+								placeholder="Your name"
 								required
 							/>
 						</div>
@@ -45,7 +72,7 @@ const Register = () => {
 							<input
 								type="password"
 								name="password"
-								placeholder="Enter your password"
+								placeholder="Your password"
 								className="bg-gray-50 border border-rose-300 text-gray-900 text-sm rounded-lg focus:ring-rose-500 focus:border-rose-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-rose-500 dark:focus:border-rose-500"
 								required
 							/>

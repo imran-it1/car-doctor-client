@@ -163,7 +163,7 @@ const Navbar = () => {
 								type="button"
 								className="py-2.5 px-5 mr-2 mb-2 text-sm font-semibold text-red-500 focus:outline-none bg-white rounded-lg border border-rose-400 hover:bg-rose-50 hover:text-red-600 focus:z-10 focus:ring-2 focus:ring-red-200 dark:focus:ring-red-700 dark:bg-red-800 dark:text-red-400 dark:border-red-600 dark:hover:text-white dark:hover:bg-red-700 transition-all duration-300 ease-in-out"
 							>
-								SignUP
+								Sign Up
 							</Link>
 						</div>
 					</nav>

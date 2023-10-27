@@ -31,6 +31,15 @@ const Services = () => {
 					<ServiceCard key={service._id} service={service}></ServiceCard>
 				))}
 			</div>
+
+			<div className=" w-full flex justify-center items-center mt-5">
+				<button
+					type="button"
+					className="focus:outline-none text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:ring-red-200 font-medium rounded-sm text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-800"
+				>
+					More Services
+				</button>
+			</div>
 		</div>
 	);
 };

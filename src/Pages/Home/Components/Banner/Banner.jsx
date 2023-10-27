@@ -16,12 +16,12 @@ const Banner = () => {
 								<h1 className=" text-6xl font-bold">
 									Affordable <br /> Price For Car <br /> Servicing
 								</h1>
-								<p className=" text-gray-300 leading-relaxed">
+								<p className=" text-gray-300 leading-relaxed mt-2">
 									There are many variations of passages of available, but <br />
 									the majority have suffered alteration in some form
 								</p>
 							</div>
-							<div className="space-x-5 mt-2">
+							<div className="space-x-5 mt-5">
 								<button
 									type="button"
 									className="rounded border border-red-500 bg-red-500 px-5 py-2.5 text-center text-sm font-medium text-white shadow-sm transition-all hover:border-red-700 hover:bg-red-700 focus:ring focus:ring-red-200 disabled:cursor-not-allowed disabled:border-red-300 disabled:bg-red-300"
@@ -151,7 +151,7 @@ const Banner = () => {
 							<a href="#slide3" className="btn btn-circle hover:bg-red-500">
 								❮
 							</a>
-							<a href="#slide5" className="btn btn-circle bg-red-500">
+							<a href="#slide1" className="btn btn-circle bg-red-500">
 								❯
 							</a>
 						</div>

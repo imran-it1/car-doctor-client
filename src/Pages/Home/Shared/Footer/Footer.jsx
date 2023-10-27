@@ -4,7 +4,7 @@ const Footer = () => {
 	return (
 		<footer>
 			<div className="bg-white dark:bg-gray-900">
-				<div className="container p-6 mx-auto">
+				<div className="container mx-auto">
 					<div className="lg:flex">
 						<div className="w-full -mx-6 lg:w-2/5">
 							<div className="px-6">
@@ -67,7 +67,7 @@ const Footer = () => {
 						</div>
 
 						<div className="mt-6 lg:mt-0 lg:flex-1">
-							<div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3">
+							<div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
 								<div>
 									<h3 className="text-gray-700 uppercase font-medium dark:text-white">
 										About
@@ -138,6 +138,17 @@ const Footer = () => {
 									>
 										Meraki UI
 									</a>
+								</div>
+								<div>
+									<h3 className="text-gray-700 uppercase dark:text-white">
+										Contact
+									</h3>
+									<span className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline">
+										+1 526 654 8965
+									</span>
+									<span className="block mt-2 text-sm text-gray-600 dark:text-gray-400 hover:underline">
+										cardoctor@email.com
+									</span>
 								</div>
 							</div>
 						</div>

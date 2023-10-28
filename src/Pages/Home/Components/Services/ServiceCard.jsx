@@ -34,15 +34,10 @@ const ServiceCard = ({ service }) => {
 					</svg>
 				</a>
 			</div>
-			<div className=" flex gap-2">
+			<div>
 				<Link to={`/checkout/${_id}`}>
-					<button className=" flex-1 btn bg-red-500 hover:bg-red-600 mt-5 text-white">
+					<button className=" btn btn-block bg-red-500 hover:bg-red-600 mt-5 text-white">
 						CheckOut
-					</button>
-				</Link>
-				<Link>
-					<button className=" flex-1 btn bg-red-500 hover:bg-red-600 mt-5 text-white">
-						Update
 					</button>
 				</Link>
 			</div>

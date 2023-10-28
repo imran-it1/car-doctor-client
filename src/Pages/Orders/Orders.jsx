@@ -39,15 +39,39 @@ const Orders = () => {
 						console.log(data.data);
 						if (data.data.deletedCount) {
 							toast.success("Delete Successfull!✅");
+							const updateState = orders?.filter(order => order._id !== id);
+							setOrders(updateState);
 						}
-						const remainingOrders = orders?.filter(order => order._id !== id);
-						setOrders(remainingOrders);
 					})
 					.catch(() => {
 						toast.error("Something went wrong!😥");
 					});
 			}
 		});
+	};
+
+	const handleConfirm = id => {
+		axios
+			.patch(`http://localhost:5000/orders/${id}`, { status: "Confirm" })
+			.then(data => {
+				console.log(data.data);
+				if (data.data.modifiedCount) {
+					// Jei gulote kono chage hobe na seigulo pete
+					const notChanged = orders?.filter(order => order._id !== id);
+					// Jetake update korlam setake pete
+					const updatedStatus = orders?.find(order => order._id === id);
+					// Status jehetu hardcoded dici seta set kore dilam
+					updatedStatus.status = "Confirm";
+					// Ekhon update kora object soho baki object gulo niye nibo and state a set kore dibo
+					const updatedOrderWithStatus = [updatedStatus, ...notChanged];
+					setOrders(updatedOrderWithStatus);
+
+					toast.success("Status update successfull!😍");
+				}
+			})
+			.catch(() => {
+				toast.error("Something went wrong!😥");
+			});
 	};
 
 	return (
@@ -75,6 +99,7 @@ const Orders = () => {
 								key={order._id}
 								order={order}
 								handleDelete={handleDelete}
+								handleConfirm={handleConfirm}
 							></OrderRow>
 						))}
 					</tbody>

@@ -1,8 +1,20 @@
 import PropTypes from "prop-types";
 
-const OrderRow = ({ order, handleDelete }) => {
-	const { _id, customerEmail, date, serviceName, img, ServiceID, Price } =
-		order || {};
+const OrderRow = ({ order, handleDelete, handleConfirm }) => {
+	const {
+		_id,
+		customerEmail,
+		date,
+		serviceName,
+		img,
+		ServiceID,
+		Price,
+		status,
+	} = order || {};
+
+	console.log(order);
+
+	// console.log(Object.keys(order).join(","));
 
 	return (
 		<tr>
@@ -46,7 +58,18 @@ const OrderRow = ({ order, handleDelete }) => {
 			</td>
 			<td>{Price}</td>
 			<th>
-				<button className="btn btn-error btn-outline">Pending</button>
+				{status === "Confirm" ? (
+					<span className="font-medium text-lg px-2 py-2 rounded-md border border-green-500">
+						Confirmed
+					</span>
+				) : (
+					<button
+						onClick={() => handleConfirm(_id)}
+						className="btn btn-error btn-sm btn-outline"
+					>
+						Pending
+					</button>
+				)}
 			</th>
 		</tr>
 	);
@@ -55,6 +78,7 @@ const OrderRow = ({ order, handleDelete }) => {
 OrderRow.propTypes = {
 	order: PropTypes.object,
 	handleDelete: PropTypes.func,
+	handleConfirm: PropTypes.func,
 };
 
 export default OrderRow;

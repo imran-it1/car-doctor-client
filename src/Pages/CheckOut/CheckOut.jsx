@@ -6,11 +6,12 @@ import toast from "react-hot-toast";
 
 const CheckOut = () => {
 	const { user } = useContext(AuthContext);
-	// const userName = user?.displayName;
+	const userName = user?.displayName;
 	const userEmail = user?.email;
 
 	const loadedService = useLoaderData();
-	const { title, price, description, service_id } = loadedService || {};
+	console.log(loadedService);
+	const { title, price, description, service_id, img } = loadedService || {};
 
 	const handleBookOrder = e => {
 		e.preventDefault();
@@ -24,12 +25,14 @@ const CheckOut = () => {
 		const message = form.message.value || "Not given";
 
 		const orderData = {
+			customerName: userName,
+			customerEmail: email,
 			serviceName: name,
 			ServiceID: service_id,
 			date,
-			customerEmail: email,
 			Price: payable,
 			message,
+			img,
 		};
 
 		// AXIOS
@@ -106,7 +109,7 @@ const CheckOut = () => {
 				</div>
 				<div className=" w-full mt-5">
 					<input
-						className=" w-full  focus:outline-none text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:ring-red-200 font-medium rounded-full transition-all ease-linear duration-500 text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-800 tracking-wider"
+						className=" w-full  focus:outline-none text-white bg-red-500 hover:bg-red-600 focus:ring-4 focus:ring-red-200 font-medium rounded-full transition-all ease-linear duration-500 text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-red-500 dark:hover:bg-red-600 dark:focus:ring-red-800 tracking-wider hover:cursor-pointer"
 						type="submit"
 						value="Order Confirm"
 					/>

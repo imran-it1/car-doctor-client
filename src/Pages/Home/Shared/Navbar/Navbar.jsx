@@ -1,9 +1,12 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import logo from "../../../../assets/logo.svg";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../../../../Provider/AuthProvider";
+import toast from "react-hot-toast";
 
 const Navbar = () => {
 	const [isToggleOpen, setIsToggleOpen] = useState(false);
+	const { user, logOut } = useContext(AuthContext);
 
 	// Navlinks
 	const navLinks = (
@@ -24,14 +27,17 @@ const Navbar = () => {
 					About
 				</NavLink>
 			</li>
-			<li className=" hover:text-red-500 transition-colors duration-200 ease-in">
-				<NavLink
-					to="/service"
-					className={({ isActive }) => (isActive ? " text-red-600" : "")}
-				>
-					Service
-				</NavLink>
-			</li>
+			{user && (
+				<li className=" hover:text-red-500 transition-colors duration-200 ease-in">
+					<NavLink
+						to="/orders"
+						className={({ isActive }) => (isActive ? " text-red-600" : "")}
+					>
+						Orders
+					</NavLink>
+				</li>
+			)}
+
 			<li className=" hover:text-red-500 transition-colors duration-200 ease-in">
 				<NavLink
 					to="/blog"
@@ -50,6 +56,16 @@ const Navbar = () => {
 			</li>
 		</div>
 	);
+
+	const handleLogOut = () => {
+		logOut()
+			.then(() => {
+				toast.success("Log out successfull☺️");
+			})
+			.catch(() => {
+				toast.error("Something went wrong!😥");
+			});
+	};
 
 	return (
 		<div className=" sticky top-0 z-10 bg-transparent">
@@ -158,13 +174,24 @@ const Navbar = () => {
 							>
 								Appointment
 							</button>
-							<Link
-								to={"/register"}
-								type="button"
-								className="py-2.5 px-5 mr-2 mb-2 text-sm font-semibold text-red-500 focus:outline-none bg-white rounded-lg border border-rose-400 hover:bg-rose-50 hover:text-red-600 focus:z-10 focus:ring-2 focus:ring-red-200 dark:focus:ring-red-700 dark:bg-red-800 dark:text-red-400 dark:border-red-600 dark:hover:text-white dark:hover:bg-red-700 transition-all duration-300 ease-in-out"
-							>
-								Sign Up
-							</Link>
+
+							{user ? (
+								<Link
+									onClick={handleLogOut}
+									type="button"
+									className="py-2.5 px-5 mr-2 mb-2 text-sm font-semibold text-red-500 focus:outline-none bg-white rounded-lg border border-rose-400 hover:bg-rose-50 hover:text-red-600 focus:z-10 focus:ring-2 focus:ring-red-200 dark:focus:ring-red-700 dark:bg-red-800 dark:text-red-400 dark:border-red-600 dark:hover:text-white dark:hover:bg-red-700 transition-all duration-300 ease-in-out"
+								>
+									Log Out
+								</Link>
+							) : (
+								<Link
+									to={"/register"}
+									type="button"
+									className="py-2.5 px-5 mr-2 mb-2 text-sm font-semibold text-red-500 focus:outline-none bg-white rounded-lg border border-rose-400 hover:bg-rose-50 hover:text-red-600 focus:z-10 focus:ring-2 focus:ring-red-200 dark:focus:ring-red-700 dark:bg-red-800 dark:text-red-400 dark:border-red-600 dark:hover:text-white dark:hover:bg-red-700 transition-all duration-300 ease-in-out"
+								>
+									Sign Up
+								</Link>
+							)}
 						</div>
 					</nav>
 				</div>

@@ -1,7 +1,8 @@
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 const ServiceCard = ({ service }) => {
-	const { title, img, price } = service || {};
+	const { _id, title, img, price } = service || {};
 
 	return (
 		<div className=" max-w-md p-4 rounded-md shadow-md dark:bg-gray-900 dark:text-gray-50">
@@ -32,6 +33,18 @@ const ServiceCard = ({ service }) => {
 						/>
 					</svg>
 				</a>
+			</div>
+			<div className=" flex gap-2">
+				<Link to={`/checkout/${_id}`}>
+					<button className=" flex-1 btn bg-red-500 hover:bg-red-600 mt-5 text-white">
+						CheckOut
+					</button>
+				</Link>
+				<Link>
+					<button className=" flex-1 btn bg-red-500 hover:bg-red-600 mt-5 text-white">
+						Update
+					</button>
+				</Link>
 			</div>
 		</div>
 	);

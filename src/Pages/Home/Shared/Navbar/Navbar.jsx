@@ -78,7 +78,9 @@ const Navbar = () => {
 						role="navigation"
 					>
 						<div className=" flex-1">
-							<img className=" w-16 h-16" src={logo} alt="" />
+							<Link to={"/"}>
+								<img className=" w-16 h-16" src={logo} alt="" />
+							</Link>
 						</div>
 						<button
 							className={`relative order-10 block h-10 w-10 self-center lg:hidden

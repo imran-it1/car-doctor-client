@@ -43,7 +43,7 @@ const OrderRow = ({ order, handleDelete, handleConfirm }) => {
 				<div className="flex items-center space-x-3">
 					<div className="avatar">
 						<div className="mask mask-squircle w-12 h-12">
-							<img src={img} alt="Avatar Tailwind CSS Component" />
+							{img ? <img src={img} alt="Avatar Tailwind CSS Component" /> : ""}
 						</div>
 					</div>
 					<div>

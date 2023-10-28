@@ -1,28 +1,45 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import img from "../../assets/images/login/login.svg";
 import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import toast from "react-hot-toast";
+import axios from "axios";
 
 const Login = () => {
 	// Use context data
 	const { signIn } = useContext(AuthContext);
 
+	// Auth Redirect
+	const navigate = useNavigate();
+	const location = useLocation();
+
 	const handleLogIn = event => {
 		event.preventDefault();
 		// Get form field value
 		const form = event.target;
-		const name = form.name.value;
+		// const name = form.name.value;
 		const email = form.email.value;
 		const password = form.password.value;
 
-		const user = { name, email, password };
-		console.log(user);
-
 		signIn(email, password)
 			.then(result => {
-				console.log(result.user);
+				const loggedInUser = result.user;
+				console.log(loggedInUser);
+				const user = { email };
 				toast.success("Login successfull😍");
+				// Get access token
+				axios
+					.post("http://localhost:5000/jwt", user, { withCredentials: true })
+					.then(data => {
+						console.log(data.data);
+						if (data.data.success) {
+							navigate(location?.state ? location?.state : "/");
+						}
+					})
+					.catch(error => {
+						console.error(error);
+						toast.error("Error from JWT!");
+					});
 			})
 			.catch(error => {
 				console.log(error);

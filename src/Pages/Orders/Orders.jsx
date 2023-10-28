@@ -2,6 +2,8 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import axios from "axios";
 import OrderRow from "./OrderRow";
+import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const Orders = () => {
 	// State to save orders data
@@ -20,7 +22,33 @@ const Orders = () => {
 			});
 	}, [url]);
 
-	console.log(orders);
+	const handleDelete = id => {
+		Swal.fire({
+			title: "Are you sure?",
+			text: "You won't be able to revert this!",
+			icon: "warning",
+			showCancelButton: true,
+			confirmButtonColor: "#3085d6",
+			cancelButtonColor: "#d33",
+			confirmButtonText: "Yes, delete it!",
+		}).then(result => {
+			if (result.isConfirmed) {
+				axios
+					.delete(`http://localhost:5000/orders/${id}`)
+					.then(data => {
+						console.log(data.data);
+						if (data.data.deletedCount) {
+							toast.success("Delete Successfull!✅");
+						}
+						const remainingOrders = orders?.filter(order => order._id !== id);
+						setOrders(remainingOrders);
+					})
+					.catch(() => {
+						toast.error("Something went wrong!😥");
+					});
+			}
+		});
+	};
 
 	return (
 		<div className=" container mx-auto py-5">
@@ -34,20 +62,20 @@ const Orders = () => {
 					{/* head */}
 					<thead>
 						<tr>
-							<th>
-								<label>
-									<input type="checkbox" className="checkbox" />
-								</label>
-							</th>
+							<th>Delete</th>
 							<th>Service Details</th>
 							<th>Email</th>
 							<th>Price</th>
-							<th>Action</th>
+							<th>Status</th>
 						</tr>
 					</thead>
 					<tbody>
 						{orders?.map(order => (
-							<OrderRow key={order._id} order={order}></OrderRow>
+							<OrderRow
+								key={order._id}
+								order={order}
+								handleDelete={handleDelete}
+							></OrderRow>
 						))}
 					</tbody>
 				</table>

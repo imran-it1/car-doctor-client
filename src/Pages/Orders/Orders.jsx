@@ -13,7 +13,7 @@ const Orders = () => {
 
 	const url = `http://localhost:5000/orders?email=${user?.email}`;
 	useEffect(() => {
-		axios(url)
+		axios(url, { withCredentials: true })
 			.then(data => {
 				setOrders(data.data);
 			})

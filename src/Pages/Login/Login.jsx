@@ -1,4 +1,4 @@
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import img from "../../assets/images/login/login.svg";
 import { useContext } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
@@ -10,8 +10,8 @@ const Login = () => {
 	const { signIn } = useContext(AuthContext);
 
 	// Auth Redirect
-	const navigate = useNavigate();
-	const location = useLocation();
+	// const navigate = useNavigate();
+	// const location = useLocation();
 
 	const handleLogIn = event => {
 		event.preventDefault();
@@ -26,19 +26,18 @@ const Login = () => {
 				const loggedInUser = result.user;
 				console.log(loggedInUser);
 				const user = { email };
+
 				toast.success("Login successfull😍");
+
 				// Get access token
 				axios
 					.post("http://localhost:5000/jwt", user, { withCredentials: true })
 					.then(data => {
 						console.log(data.data);
-						if (data.data.success) {
-							navigate(location?.state ? location?.state : "/");
-						}
 					})
 					.catch(error => {
-						console.error(error);
-						toast.error("Error from JWT!");
+						console.log(error);
+						toast.error("Error from JWT", error);
 					});
 			})
 			.catch(error => {

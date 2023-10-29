@@ -12,8 +12,6 @@ const OrderRow = ({ order, handleDelete, handleConfirm }) => {
 		status,
 	} = order || {};
 
-	console.log(order);
-
 	// console.log(Object.keys(order).join(","));
 
 	return (
